@@ -42,10 +42,19 @@ app.get("/reserves", function(req, res) {
 });
 
 app.post("/api/tables", function(req, res) {
-    newGuests.push(guest);
+    let newUser = req.body;
+
+    newGuests.push(newUser);
     waitList.push(waiters);
+
+    console.log(newUser);
+    res.json(newUser);
+});
+
+app.get("/api/tables", function(req, res) {
+    res.sendFile(path.join(__dirname, "reserves.html"));
 });
 
 app.listen(PORT, function() {
     console.log(`App listening on PORT ${PORT}`);
-})
+});

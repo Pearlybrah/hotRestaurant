@@ -11,76 +11,66 @@
 
 </head>
 <body>
+    <h1>Reserves</h1>
 
-  <div class="container">
-    <div class="jumbotron">
-      <h1>Order list</h1>
-      <h3> Today's Combo(Special Plates) </h3>
-      <hr>
-      <a href="/"><button class="btn btn-danger btn-lg"><span class="fa fa-eye"></span> View Orders</button></a>
-    </div>
-    <div class="row">
+    <div class="card">
+        <div class="card-header">
+          <h3><strong>Add Your Reservation</strong></h3>
+        </div>
+        <div class="card-body">
+          <form method="POST" role="form">
 
-      <div class="col-12">
-
-        <div class="card">
-          <div class="card-header">
-            <h3><strong> Make a reservation</strong></h3>
-          </div>
-          <div class="card-body">
-            <form method="POST" role="form">
-
-              <div class="form-group">
-                <label for="name"> Name </label>
-                <input type="text" class="form-control" id="name">
-              </div>
-
-              <div class="form-group">
-                <label for="Phone">Phone</label>
-                <input type="text" class="form-control" id="role">
-              </div>
-
-              <div class="form-group">
-                <label for="E-mail">E-mail</label>
-                <input type="text" class="form-control" id="age">
-              </div>
-
-              <div class="form-group">
-                <label for= "User-Id">User-Id</label>
-                <input type="text" class="form-control" id="force-points">
-              </div>
-
-            </form>
-            <br>
-            <div class="text-right">
-              <button type="submit" class="btn btn-primary btn-md" id="add-btn"><span class="fa fa-fire"></span> Complete Reservation</button>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name">
             </div>
+
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="text" class="form-control" id="phone">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" class="form-control" id="email">
+            </div>
+
+            <div class="form-group">
+              <label for="userID">UserID</label>
+              <input type="text" class="form-control" id="userId">
+            </div>
+
+          </form>
+          <br>
+          <div class="text-right">
+            <button type="submit" class="btn btn-primary btn-md" id="add-btn"><span class="fa fa-fire"></span> Add Your Reservation Now!</button>
           </div>
         </div>
-
       </div>
-    </div>
-  </div>
 
-  <script type="text/javascript">
-    // Question: What does this code do?
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script type="text/javascript">
+
     $("#add-btn").on("click", function(event) {
-      event.preventDefault();
-      var newTables = {
-        Name: $("#name").val().trim(),
-        Phone: $("#phone").val().trim(),
-        Email: $("#Email").val().trim(),
-        UserId: $("#UserId").val().trim()
-      };
 
-      // Question: What does this code do??
-      $.post("/api/reservationdetails", newreservation)
+        console.log("test");
+        event.preventDefault();
+
+        var newUser = {
+            name: $("#name").val().trim(),
+            phone: $("#phone").val().trim(),
+            email: $("#email").val().trim(),
+            userID: $("#userId").val().trim()
+        };
+        console.log(newUser);
+
+        $.post("/api/tables", newUser)
         .then(function(data) {
-          console.log("add.html", data);
-          alert("Adding reservation");
+            console.log("reserves.html", data);
+            alert("Table Reserved!");
         });
     });
-  </script>
-
+    </script>
+    
 </body>
 </html>
