@@ -17,16 +17,6 @@ let waiters = {
     email: "",
     userID: ""
 };
-let guest = {
-    name: "",
-    phone: "",
-    email: "",
-    userID: ""
-};
-
-
-
-
 
 app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "index.html"));
@@ -44,15 +34,19 @@ app.get("/reserves", function(req, res) {
 app.post("/api/tables", function(req, res) {
     let newUser = req.body;
 
-    newGuests.push(newUser);
-    waitList.push(waiters);
-
     console.log(newUser);
     res.json(newUser);
+
 });
 
 app.get("/api/tables", function(req, res) {
     res.sendFile(path.join(__dirname, "reserves.html"));
+
+    if (newGuests.length < 5) {
+        newGuests.push(newUser);
+    } else {
+        waitList.push(newUser);
+    };
 });
 
 app.listen(PORT, function() {
