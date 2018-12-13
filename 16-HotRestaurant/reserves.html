@@ -53,7 +53,6 @@
 
     $("#add-btn").on("click", function(event) {
 
-        console.log("test");
         event.preventDefault();
 
         var newUser = {
@@ -62,14 +61,22 @@
             email: $("#email").val().trim(),
             userID: $("#userId").val().trim()
         };
-        console.log(newUser);
+        
 
         $.post("/api/tables", newUser)
         .then(function(data) {
             console.log("reserves.html", data);
             alert("Table Reserved!");
+            //clearAll();
         });
     });
+
+    function clearAll() {
+        $("#name").val("");
+        $("#phone").val("");
+        $("#email").val("");
+        $("#userId").val("");        
+    };
     </script>
     
 </body>
