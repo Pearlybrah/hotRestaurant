@@ -11,12 +11,6 @@ app.use(express.json());
 var newGuests = [];
 var waitList = [];
 
-let waiters = {
-    name: "",
-    phone: "",
-    email: "",
-    userID: ""
-};
 
 app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "index.html"));
@@ -33,20 +27,24 @@ app.get("/reserves", function(req, res) {
 
 app.post("/api/tables", function(req, res) {
     let newUser = req.body;
+    
+    if (newGuests.length < 5) {
+        newGuests.push(newUser);
+    } else {
+        waitList.push(newUser);
+    };
 
     console.log(newUser);
     res.json(newUser);
 
 });
 
-app.get("/api/tables", function(req, res) {
-    res.sendFile(path.join(__dirname, "reserves.html"));
+app.get("/api/tables/reserved", function(req, res) {
+    return res.json(newGuests);
+});
 
-    if (newGuests.length < 5) {
-        newGuests.push(newUser);
-    } else {
-        waitList.push(newUser);
-    };
+app.get("/api/tables/waitlist", function(req, res) {
+    return res.json(waitList);
 });
 
 app.listen(PORT, function() {
